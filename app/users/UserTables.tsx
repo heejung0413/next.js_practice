@@ -7,6 +7,7 @@ interface User {
   email: string;
 }
 
+//user table
 const UserTables = async () => {
   const res = await fetch('https://jsonplaceholder.typicode.com/users', {
     cache: 'no-store',
