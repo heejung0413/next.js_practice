@@ -1,13 +1,25 @@
-import ProductCards from '@/components/ProductCards'
-import Image from 'next/image'
-import Link from 'next/link'
+import ProductCards from '@/components/ProductCards';
+import { getServerSession } from 'next-auth';
+import Link from 'next/link';
+import { authOptions } from './api/auth/[...nextauth]/route';
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession(authOptions);
   return (
     <main>
-      Hello, world!
+      <h1>
+        안녕하세요 ,
+        {session && (
+          <div>
+            <span>{session.user!.name}</span>
+            <Link href="/api/auth/signout" className="ml-3">
+              Sign out
+            </Link>
+          </div>
+        )}
+      </h1>
       <Link href="/users">users</Link>
-      <ProductCards/>
-    </main> 
-  )
+      <ProductCards />
+    </main>
+  );
 }
