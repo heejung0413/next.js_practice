@@ -1,10 +1,9 @@
-import { PrismaAdapter } from '@auth/prisma-adapter';
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import prisma from '@/prisma/client';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcrypt';
-import { PrismaClient } from '@prisma/client';
+import { PrismaAdapter } from '@auth/prisma-adapter';
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -12,14 +11,14 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        email: { label: 'Email', type: 'email', placeholder: 'email' },
+        email: { label: 'Email', type: 'email', placeholder: 'Email' },
         password: {
           label: 'Password',
           type: 'password',
           placeholder: 'Password',
         },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         if (!credentials?.email || !credentials.password) return null;
 
         const user = await prisma.user.findUnique({
