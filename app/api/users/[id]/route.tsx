@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import schema from '../schema';
+import prisma from '@/prisma/client';
 
 export function GET(request: NextRequest, { params }: { params: { id: number } }) {
   if (params.id > 10) {
@@ -17,7 +18,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: numb
   }
 
   const user = await prisma?.user.findUnique({
-    where: { id: params.id },
+    where: { id: String(params.id) },
   });
 
   if (!user) {
@@ -32,7 +33,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: numb
 
 export async function DELETE(request: NextRequest, { params }: { params: { id: number } }) {
   const user = await prisma?.user.findUnique({
-    where: { id: params.id },
+    where: { id: String(params.id) },
   });
   if (!user) {
     return NextResponse.json({ error: 'User Not found' }, { status: 404 });
