@@ -1,21 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/prisma/client';
+import schema from './schema';
 
-export function GET(request: NextRequest) {
-  return NextResponse.json([
-    { id: 1, name: 'a' },
-    { id: 2, name: 'b' },
-  ]);
+export async function GET() {
+  const users = await prisma.user.findMany();
+  return NextResponse.json(users);
 }
-
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  if (!body.name) {
-    return NextResponse.json({ error: 'Name is required' }, { status: 404 });
+  const validation = schema.safeParse(body);
+  if (!validation.success) {
+    return NextResponse.json(validation.error.errors, { status: 404 });
   }
+
   const user = await prisma?.user.findUnique({
     where: { email: body.email },
   });
+
   if (user) {
     return NextResponse.json({ error: 'User Already Exists' }, { status: 400 });
   }
@@ -25,5 +26,6 @@ export async function POST(request: NextRequest) {
       email: body.email,
     },
   });
+
   return NextResponse.json(newUser);
 }

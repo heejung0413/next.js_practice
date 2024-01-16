@@ -11,7 +11,7 @@ export default async function Home() {
         안녕하세요 ,
         {session && (
           <div>
-            <span>{session.user!.name}</span>
+            <span>{session.user!.name}님 반갑습니다</span>
             <Link href="/api/auth/signout" className="ml-3">
               Sign out
             </Link>

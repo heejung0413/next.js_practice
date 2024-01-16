@@ -11,9 +11,15 @@ const UploadPage = () => {
   const [publicId, setPublicId] = useState('');
   return (
     <>
-      <CldImage src={publicId} width={270} height={180} alt="upload image not found" />
+      {publicId && <CldImage src={publicId} width={270} height={180} alt="upload image not found" />}
       <CldUploadWidget
-        uploadPreset="xk2ztu2w"
+        uploadPreset="s9wepdle"
+        options={{
+          sources: ['local'],
+          multiple: false,
+          maxFiles: 5,
+          styles: {},
+        }}
         onUpload={(result, widget) => {
           if (result.event !== 'success') return;
           const info = result.info as CloudinaryResults;
