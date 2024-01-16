@@ -1,15 +1,14 @@
-import React from 'react'
+import React from 'react';
 
-interface Props{
-  params : {
+interface Props {
+  params: {
     username: string[];
-  }
+  };
+  searchParams: {};
 }
 
-const ProfilePage = (props:Props) => {
-  return (
-    <div>ProfilePage</div>
-  )
-}
+const ProfilePage = (props: Props) => {
+  return <div>ProfilePage</div>;
+};
 
-export default ProfilePage
+export default ProfilePage;
