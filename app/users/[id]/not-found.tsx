@@ -7,7 +7,7 @@ interface Props {
 
 const UserNotFound = ({ params: { id } }: Props) => {
   if (id > 10) notFound();
-  return <div>10보다 큰 사용자는 존재하지 않습니다.</div>;
+  return <div>10보다 큰 사용자는 존재하지 않습니다. </div>;
 };
 
 export default UserNotFound;
