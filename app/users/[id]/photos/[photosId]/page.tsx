@@ -1,10 +1,8 @@
-import React from 'react';
-
 interface Props {
   params: { id: number; photoId: number };
 }
 
-const PotoPage = (props: Props) => {
+const PhotoPage = (props: Props) => {
   return (
     <div>
       photopage {props.params.id} {props.params.photoId}
@@ -12,4 +10,4 @@ const PotoPage = (props: Props) => {
   );
 };
 
-export default PotoPage;
+export default PhotoPage;
