@@ -10,13 +10,13 @@ const UsersPage = async ({ searchParams: { sortOrder } }: Props) => {
   return (
     <>
       <Link href="/users/new" className="btn btn-primary">
-        New User
+        Go to New User Page
       </Link>
       <Suspense fallback={<p>Loading...</p>}>
         <UserTables sortOrder={sortOrder} />
       </Suspense>
     </>
   );
-}; 
+};
 
 export default UsersPage;
